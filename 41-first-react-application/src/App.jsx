@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import Clicker from "./Clicker";
+import People from "./People";
 
 export default function App({ clickerAmount, children }) {
   const [hasClicker, setHasClicker] = useState(true);
@@ -15,6 +16,29 @@ export default function App({ clickerAmount, children }) {
   const increment = () => {
     setCount(count + 1);
   };
+
+  // useMemo: code in function is only executed when state in dependency array changes
+  // If there is no dependency the function will only be executed once
+  // You can use it to return a value and that value will be "cached", meaning it won't change when the component function is called again (re-rendered) (like when a state changes)
+  const colors = useMemo(() => {
+    const colors = [];
+    for (let i = 0; i < clickerAmount; i++) {
+      colors.push(`hsl(${Math.random() * 360}deg, 70%, 70%)`);
+    }
+    return colors;
+  }, []);
+
+  // How to acces dom elements?
+  // you can have a ref prop like this: "ref={buttonRef}"
+  // this buttonRef won't be accesable after first draw (bc. the jsx is not loaded in dom)
+  // But it will be accesable in useRef() (useRef is executed after the whole component is rendered)
+  const buttonRef = useRef();
+
+  useEffect(() => {
+    buttonRef.current.style.borderRadius = "20px";
+    buttonRef.current.style.border = "none";
+    buttonRef.current.style.padding = "0.5em";
+  }, []);
 
   return (
     <>
@@ -33,14 +57,18 @@ export default function App({ clickerAmount, children }) {
               key={index}
               increment={increment}
               keyName={"count" + index}
-              color="chocolate"
+              // problem: if a Clicker is clicked the App count state changes
+              // this makes the whole component rerender
+              // and makes the color below a new color
+              color={colors[index]}
             ></Clicker>
           ))}
         </>
       ) : null}
-      <button onClick={toggleClicker}>
+      <button ref={buttonRef} onClick={toggleClicker}>
         {hasClicker ? "Hide clicker" : "Show clicker"}
       </button>
+      <People></People>
     </>
   );
 }

@@ -26,10 +26,6 @@ export default function Clicker({ keyName, color, increment = "crimson" }) {
     increment();
   };
 
-  const destroy = () => {
-    localStorage.clear();
-  };
-
   return (
     <div>
       <p
