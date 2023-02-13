@@ -10,7 +10,7 @@ const myBool = true;
 
 root.render(
   <div>
-    <App>
+    <App clickerAmount={2}>
       <h1>Hello world!</h1>
       <h2>My first React app</h2>
     </App>

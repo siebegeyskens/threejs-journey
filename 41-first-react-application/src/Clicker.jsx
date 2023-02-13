@@ -1,14 +1,16 @@
-import { useEffect, useState } from "React";
+import { useEffect, useState } from "react";
 
-export default function Clicker({ keyName, color = "crimson" }) {
+export default function Clicker({ keyName, color, increment = "crimson" }) {
   const [count, setCount] = useState(
     parseInt(localStorage.getItem(keyName) ?? 0)
   ); // nullish coalescing operator
 
   useEffect(() => {
     // The way to call a f. when the component is being rendered for the first time
+    // inside this function
 
     // The way to call a f. when component has been disposed off.
+    // inside the function returned
     return () => {
       localStorage.removeItem(keyName);
     };
@@ -21,6 +23,7 @@ export default function Clicker({ keyName, color = "crimson" }) {
 
   const buttonClick = () => {
     setCount(count + 1);
+    increment();
   };
 
   const destroy = () => {
