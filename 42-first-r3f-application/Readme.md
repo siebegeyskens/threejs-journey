@@ -1,25 +1,16 @@
-# Contents
+# First R3F Application:
 
-## React Three Fiber setup
+## Content:
 
-## Syntax
-
-## First scene
-
-## Creating and handling meshes
-
-## Animations
-
-## Groups
-
-## Orbitcontrols
-
-## Lights
-
-## Custom geometry
-
-## Canvas settings
-
-## Performance
-
-## Going further
+- React Three Fiber setup
+- Syntax
+- First scene
+- Creating and handling meshes
+- Animations
+- Groups
+- Orbitcontrols
+- Lights
+- Custom geometry
+- Canvas settings
+- Performance
+- Going further
